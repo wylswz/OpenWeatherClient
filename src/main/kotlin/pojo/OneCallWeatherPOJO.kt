@@ -1,7 +1,9 @@
-package main.kotlin.pojo
+package com.xmbsmdsj.pojo
 
+import com.xmbsmdsj.serializers.TimezoneSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import java.util.*
 
 
 /**
@@ -58,12 +60,13 @@ class Current(
     var uvi: Double,
     var visibility: Double,
     @SerialName("wind_speed") var windSpeed: Double,
-    @SerialName("wind_gust") var windGust: Double,
-    @SerialName("wind_deg")var windDeg: Double,
-    var rain: Map<String, String>,
-    var weather: WeatherMeta
+    @SerialName("wind_gust") var windGust: Double? = null,
+    @SerialName("wind_deg")var windDeg: Double? = null,
+    var rain: Map<String, String>? = null,
+    var weather: List<WeatherMeta>
 )
 
+@Serializable
 class Hourly(
     var dt: Long,
     var temp: Double,
@@ -73,11 +76,21 @@ class Hourly(
     @SerialName("dew_point") var dewPoint: Double,
     var clouds: Double,
     var visibility: Double,
-    @SerialName("wind_gust")var windGust: Double,
+    @SerialName("wind_gust")var windGust: Double? = null,
     @SerialName("wind_speed")var windSpeed: Double,
-    @SerialName("wind_deg")var windDeg: Double,
+    @SerialName("wind_deg")var windDeg: Double?,
     var pop: Double,
-    var rain: Map<String, String>,
-    var snow: Map<String, String>,
-    var weather: WeatherMeta
+    var rain: Map<String, String>? = null,
+    var snow: Map<String, String>? = null,
+    var weather: List<WeatherMeta>
 )
+
+@Serializable
+class OneCallResponse(
+    var lat: Double,
+    var lon: Double,
+    @Serializable(with = TimezoneSerializer::class) var timezone: TimeZone,
+    @SerialName("timezone_offset")var timezoneOffset: Long,
+    var current: Current,
+    var hourly: List<Hourly>
+){}
