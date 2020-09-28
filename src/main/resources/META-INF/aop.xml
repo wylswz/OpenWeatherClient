@@ -1,0 +1,8 @@
+<aspectj>
+	<aspects>
+		<aspect name="com.xmbsmdsj.aop.SingletonInterceptor"/>
+<!--		<weaver options="-verbose -showWeaveInfo">-->
+<!--			<include within="com.xmbsmdsj.*"/>-->
+<!--		</weaver>-->
+	</aspects>
+</aspectj>

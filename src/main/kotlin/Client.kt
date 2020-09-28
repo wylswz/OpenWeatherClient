@@ -1,6 +1,7 @@
 package com.xmbsmdsj
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
+import com.xmbsmdsj.aop.Singleton
 import com.xmbsmdsj.client.OneCallApi
 import com.xmbsmdsj.interceptors.TokenAuthInterceptor
 import kotlinx.serialization.json.Json
@@ -33,6 +34,7 @@ class Client(token: String) {
     }
 
 
+    @Singleton
     fun oneCallApi(): OneCallApi = retrofit.create(OneCallApi::class.java)
 
 }
